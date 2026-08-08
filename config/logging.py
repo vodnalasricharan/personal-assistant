@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import json
 import logging
-from logging.handlers import RotatingFileHandler
-from pathlib import Path
 from typing import Any
 
 from config.settings import Settings
@@ -29,13 +27,10 @@ def configure_logging(settings: Settings) -> None:
     """Configure application logging once."""
 
     root_logger = logging.getLogger()
-    if any(isinstance(handler, RotatingFileHandler) for handler in root_logger.handlers):
+    if any(isinstance(handler, logging.StreamHandler) and not isinstance(handler, logging.FileHandler) for handler in root_logger.handlers):
         return
 
-    log_path: Path = settings.log_file
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-
-    handler = RotatingFileHandler(log_path, maxBytes=1_000_000, backupCount=3, encoding="utf-8")
+    handler = logging.StreamHandler()
     handler.setFormatter(JsonFormatter())
 
     root_logger.setLevel(logging.INFO)
