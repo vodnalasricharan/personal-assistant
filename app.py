@@ -67,8 +67,6 @@ def _sidebar(dev_mode: bool) -> str:
         st.session_state.contact_modal_open = True
         st.rerun()
 
-    if not dev_mode:
-        st.sidebar.caption("ℹ️ Dev mode off — set `DEV_MODE=true` in .env to access admin pages.")
 
     st.session_state.page = page
     return page
