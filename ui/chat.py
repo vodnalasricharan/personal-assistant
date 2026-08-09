@@ -80,12 +80,13 @@ def _render_feedback_dialog(settings: Settings, history: list[Message]) -> None:
                 f"Full conversation transcript:\n\n{context_message}"
             )
 
-            email_tool = EmailTool(settings)
-            result = email_tool.send_contact_message(
-                visitor_name=visitor_name,
-                visitor_message=composed_message,
-                subject="Response feedback via Personal AI Assistant",
-            )
+            with st.spinner("Sending feedback…"):
+                email_tool = EmailTool(settings)
+                result = email_tool.send_contact_message(
+                    visitor_name=visitor_name,
+                    visitor_message=composed_message,
+                    subject="Response feedback via Personal AI Assistant",
+                )
             if result.get("success"):
                 st.success("✅ Feedback sent!")
                 st.session_state.feedback_modal_open = False
@@ -147,12 +148,13 @@ def _render_sidebar_contact_dialog(settings: Settings) -> None:
             if not visitor_message.strip():
                 st.error("Message cannot be empty.")
                 return
-            email_tool = EmailTool(settings)
-            result = email_tool.send_contact_message(
-                visitor_name=visitor_name,
-                visitor_message=visitor_message.strip(),
-                subject="New message via Personal AI Assistant",
-            )
+            with st.spinner("Sending message…"):
+                email_tool = EmailTool(settings)
+                result = email_tool.send_contact_message(
+                    visitor_name=visitor_name,
+                    visitor_message=visitor_message.strip(),
+                    subject="New message via Personal AI Assistant",
+                )
             if result.get("success"):
                 st.success("✅ Message sent! The owner will get back to you.")
                 st.session_state.contact_modal_open = False
