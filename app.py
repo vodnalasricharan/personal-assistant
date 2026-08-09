@@ -84,8 +84,7 @@ def main() -> None:
     configure_logging(settings)
     configure_langsmith(settings)
 
-    st.title("Personal AI Assistant")
-    st.caption("Ask me anything about the profile in your personal knowledge base.")
+    st.title("Charan's Personal AI Assistant")
 
     page = _sidebar(settings.dev_mode)
 
