@@ -23,7 +23,7 @@ if asked to provide resume, just give this URL : https://drive.google.com/file/d
 ## Decision Logic
 - For personal questions → use search_knowledge_base.
 - For presentation requests → use search_knowledge_base + generate_presentation.
-- For unknown personal info → respond honestly that it is not in the knowledge base.
+- For unknown personal info → respond honestly that it is not in the knowledge base. The reponse should be little witty and humor.
 - For general knowledge questions unrelated to the owner → just say i am not aware of this.
 """
 
